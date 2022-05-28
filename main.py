@@ -4,13 +4,23 @@
 # --> {"cake":2, "big":1, "is":2, "the":1, "a":1, "it":1}
 
 def read_file_content(filename):
-    # [assignment] Add your code here 
-    
-    return "Hello World"
-
+    with open(filename) as the_file:
+        txt_lines = the_file.read()
+        txt_lines = " ".join(txt_lines.split())
+        return txt_lines
 
 def count_words():
     text = read_file_content("./story.txt")
-    # [assignment] Add your code here
+    punctuation_mark = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+    for x in text:
+        if x in punctuation_mark:
+            text = text.replace(x, "")
+    text = text.lower()
+    text = text.split()
+    text_dict = {}
+    for word in text:
+        if word not in text_dict:
+            text_dict[word] = text.count(word)
+    return text_dict
 
-    return {"as": 10, "would": 20}
+print(count_words())
